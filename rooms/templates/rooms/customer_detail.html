@@ -1,0 +1,41 @@
+{% extends "rooms/base.html" %}
+{%block title%}
+<title>Customer</title>
+{%endblock%}
+{%block content%}
+<h2>Customer Detail</h2>
+<dl>
+    <dt>Name:</dt>
+    <dd>{{ customer.name }}</dd>
+    <dt>Phone No. :</dt>
+    <dd>{{ customer.phone }}</dd>
+    <dt>Email:</dt>
+    <dd>{{ customer.email }}</dd>
+    <dt>Room No. :</dt>
+    <dd>{{ customer.room }}</dd>
+    <dt>Type of Personal Id :</dt>
+    <dd>{{ customer.personalid }}</dd>
+    <dt>{{customer.personalid}} No. :</dt>
+    <dd>{{ customer.idnumber }}</dd>
+    <dt>Check in Time:</dt>
+    <dd>{{customer.checkedin}}</dd>
+    {%if customer.checkout %}
+    <dt>Check out Time:</dt>
+    <dd>{{customer.checkout}}</dd>
+    <dt>Bill:</dt>
+    <dd>Rs. {{customer.bill}}</dd>
+    {%else%}
+    <dt>Bill:</dt>
+    <dd>
+        <form method="post">
+            {% csrf_token %}
+            <div> 
+                <input type="number" name="bill" id="billvalue" class="mb-4" required>
+            </div>
+            <button type="submit" class="btn btn-primary" id="checkout" >Check Out</button>
+        </form>
+    </dd>
+    
+    {%endif%}
+</dl>
+{%endblock%}

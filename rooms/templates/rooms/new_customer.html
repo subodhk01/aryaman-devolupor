@@ -1,0 +1,43 @@
+{% extends "rooms/base.html" %}
+
+{%block content%}
+<h2>New Customer</h2>
+  <form method="post" id="customer_details">
+    {% csrf_token %}
+    <div class="form-group">
+      <label>Name:</label>
+      <input type="text" name="name" class="form-control" placeholder="Enter Name" id="inputName" required/>
+    </div>
+    <div class="form-group">
+      <label>Phone No. :</label>
+      <input type="tel" name="contact" class="form-control" placeholder="Enter Phone Name" id="inputPhonenum" required/>
+    </div>
+    <div class="form-group">
+      <label >Email:</label>
+      <input type="email" class="form-control" placeholder="Enter Email" name="email" id="inputEmail">
+    </div>
+    <div class="form-group">
+      <label for="idProof  ">Choose a id Proof:</label>
+      <select name="idProof" id="inputIdProof" form="customer_details" class="custom-select" required>
+        <option value="Aadhar Card">Aadhar Card</option>
+        <option value="Passport">Passport</option>
+        <option value="Voter ID">Voter ID</option>
+        <option value="Driving License">Driving License</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label><span id= "id"></span>IdProof Number:</label>
+      <input type="text" class="form-control" placeholder="Enter Id Number" name="idProofnum" id="inputIdProofnum" required/>
+    </div>
+    <div class="form-group">
+        <label for="roomNum  ">Choose a Room Number:</label>
+        <select name="roomNum" id="inputRoomNum" form="customer_details" class="custom-select" required>
+          {% for i in rooms %}
+          <option value="{{i}}">{{i.roomid}}</option>
+          {% endfor %}
+        </select>
+    </div>
+    {% if msg %}<script>alert("{{msg}}")</script>{% endif %}
+    <button type="submit" class="btn btn-primary">Check In</button>
+  </form>
+{%endblock%}

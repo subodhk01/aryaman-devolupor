@@ -1,0 +1,34 @@
+{% extends "rooms/base.html" %}
+
+{%block title%}
+<title>Rooms</title>
+{%endblock%}
+
+{%block content%}
+<h2>Rooms</h2>
+<table class="table">
+    <thead>
+        <tr>
+        <th scope="col">#</th>
+        <th scope="col">Room No.</th>
+        <th scope="col">Status</th>
+        <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in rooms %}
+        <tr>
+        <th scope="row">{{ forloop.counter }}</th>
+        <td>{{ i.roomid }}</td>
+        {% if i.status %}
+        <td>Booked</td>
+        <td><button type="button" class="btn btn-primary" onclick="location.href='/room/{{i.id}}/';">Get Details</button></td>
+        {% else %}
+        <td>Available</td>
+        <td><button type="button" class="btn btn-primary" onclick="location.href='/newcustomer/';">Add New Customer</button></td>
+        {% endif %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{%endblock%}

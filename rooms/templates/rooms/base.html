@@ -1,0 +1,56 @@
+{% load static %}
+<html>
+<head>
+  
+  {% block title %}
+  <title>Library</title>
+  {% endblock %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="theme-color" content="rgb(14, 77, 146)" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Chelsea+Market&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  
+</head>
+
+<body>
+
+    <div class="container main-container">
+        <div class="row">
+            <div class="col-12" style="padding-right: 0;padding-left: 0;">
+                <h2  id="heading">THE DEDAR RESORT</h2>
+        <nav class="navbar navbar-expand-sm bg-dark justify-content-end navbar-dark">
+        {% block navbar %}
+        <ul class="navbar-nav" >
+            <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Home</a></li>
+            {% if user.is_authenticated %}
+            <li class="nav-item"><a class="nav-link" href="{% url 'customers_list' %}">Customers</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'new_customer' %}">New Customer</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'rooms_list' %}">Rooms</a></li>
+            <li class="nav-item dropdown"><a class="dropdown-toggle nav-link"  id="navbardrop" data-toggle="dropdown" class="nav-link" style="cursor:pointer">{{ user.first_name }}</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                </div>
+            </li>   
+            {% else %}
+                <li class="nav-item"><a class="nav-link" href="{% url 'login'%}">Login</a></li>
+            {% endif %} 
+        </ul>
+        
+        {% endblock %}
+        </nav>
+            </div>
+        </div>
+        <div class="row">
+        <div class="col ">
+        {% block content %}{% endblock %}   
+        </div>
+        </div>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+{% extends "rooms/base.html" %}
+
+{%block content%}
+<table class="table">
+    <thead>
+        <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Room No.</th>
+        <th scope="col">Checked In</th>
+        <th scope="col">CheckOut</th>
+        <th scope="col">Bill</th>
+        <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in customers reversed %}
+        <tr>
+        <th scope="row">{{ forloop.counter }}</th>
+        <td>{{ i.name}}</td>
+        <td>{{ i.room }}</td>
+        <td>{{ i.checkedin }}</td>
+        <td>{{ i.checkout }}</td>
+        <td>{{ i.bill}}</td>
+        <td><button type="button" class="btn btn-primary" onclick="location.href='/customer/{{ i.id }}/';">Get Details</button></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{%endblock%}
